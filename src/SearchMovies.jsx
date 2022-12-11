@@ -1,7 +1,11 @@
-import React from "react";
-
+import React, {useState} from "react";
 export default function SearchMovies(){
+
+    //states - input query, movies
+    const [query, setQuery] = useState('')
     
+    const [movies, setMovies] = useState([])
+
     const searchMovies = async (e) => {
         e.preventDefault();
 
@@ -10,6 +14,7 @@ export default function SearchMovies(){
         try {
             const res = await fetch(url)
             const data = await res.json()
+            setMovies(data.results)
 
         }catch(err){
             console.error(err)
@@ -18,7 +23,10 @@ export default function SearchMovies(){
     return (
         <form className="form" onSubmit={searchMoviesd}>
             <label htmlFor="query" className="Label">Movie name</label>
-            <input className="input" type="text" name="query" placeholder="i.e. Jurassic Park"/>
+            <input className="input" type="text" name="query" 
+            placeholder="i.e. Jurassic Park"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}/>
 
             <button className="button" type="submit">Search</button>
             
