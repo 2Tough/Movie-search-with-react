@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import MovieCard from "./MovieCard";
+
 export default function SearchMovies(props){
 
     //states - input query, movies
