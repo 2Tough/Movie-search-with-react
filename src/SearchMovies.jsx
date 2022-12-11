@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-export default function SearchMovies(){
+export default function SearchMovies(props){
 
     //states - input query, movies
     const [query, setQuery] = useState('')
@@ -21,19 +21,22 @@ export default function SearchMovies(){
         }
     }
     return (
-        <form className="form" onSubmit={searchMoviesd}>
-            <label htmlFor="query" className="Label">Movie name</label>
-            <input className="input" type="text" name="query" 
-            placeholder="i.e. Jurassic Park"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}/>
+        <>
+            <form className="form" onSubmit={searchMoviesd}>
+                <label htmlFor="query" className="Label">Movie name</label>
+                <input className="input" type="text" name="query" 
+                placeholder="i.e. Jurassic Park"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}/>
 
-            <button className="button" type="submit">Search</button>
-            
-            
-            
-            
-        </form>
+                <button className="button" type="submit">Search</button>
+            </form>
+            <div className="card-list">
+                {movies.filter(movie => movie.poster_path).map(movie => (
+                   <MovieCard movie={movie}  key={movie.id}/>
+                ))}
+            </div>    
+        </>
     )
 }
 
